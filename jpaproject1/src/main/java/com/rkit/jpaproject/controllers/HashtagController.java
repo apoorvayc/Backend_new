@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rkit.jpaproject.entities.Graphorpie;
 import com.rkit.jpaproject.entities.Hashtag;
 import com.rkit.jpaproject.service.HashtagService;
 
@@ -70,5 +71,23 @@ public class HashtagController {
 			 List<String> list = (List<String>) query.getResultList();
 			 return list;
 		}
+		 
+		 @GetMapping("/graphorpie")
+		 public List<Graphorpie> graohorpie() {
+			 Query query = entityManager.createQuery("select rating, count(empId) from Emp_Rating group by rating");
+			 List<Object> list = query.getResultList();
+			 List<Graphorpie> graphorpie1 = new ArrayList<Graphorpie>(); 
+			 for(Object h1:list) {
+				 	Graphorpie g = new Graphorpie();
+	    		    Object[] fields = (Object[]) h1;
+	    		    Integer rating = (Integer) fields[0];
+	    		    Long noofusers = (Long) fields[1];
+	    		    g.setNoofusers(noofusers);
+	    		    g.setRating(rating);
+	    		    System.out.printf("rating and users : %s, count: %s%n", rating, noofusers);
+	    		    graphorpie1.add(g);  
+	      }
+			 return graphorpie1; 
+		 }
 
 }
