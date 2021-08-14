@@ -1,23 +1,10 @@
 package com.rkit.jpaproject.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Employee {
 
-
-    @OneToMany(targetEntity=Emp_Rating.class,cascade=CascadeType.ALL)
-    @JoinColumn(name="emp_fk" , referencedColumnName="id")
-    private List<Emp_Rating> er;
-
-    public List<Emp_Rating> getEr() {
-        return er;
-    }
-
-    public void setEr(List<Emp_Rating> er) {
-        this.er = er;
-    }
 
     @Id
     private long id;
