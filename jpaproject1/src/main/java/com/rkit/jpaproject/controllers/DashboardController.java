@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,14 +27,13 @@ import javax.persistence.Query;
 @RestController
 @AllArgsConstructor
 @CrossOrigin
-@RequestMapping("/api/dashboard")
 public class DashboardController {
     EmpRatingService empRatingService;
 
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-    @GetMapping
+    @GetMapping("/dashboard")
     public List<Pair> getDashboardTable() {
 
 
@@ -53,6 +53,26 @@ public class DashboardController {
         }
         return records;
     }
+    
+    @GetMapping("/dashboard/searchEmployee/{name}")
+    public List<Pair> searchEmployee(@PathVariable("name")String name) {
+    	Query query = (Query) entityManager.createQuery("select e.emailID,e.name,avg(r.rating) from Emp_Rating r join Employee e on r.empId = e.id group by e.id having e.name='"+name+"'");
+        List<Object> list = (List<Object>) query.getResultList();
+        List<Pair> records = new ArrayList<Pair>();
+        for (Object h1 : list) {
+            Object[] fields = (Object[]) h1;
+            String email = (String) fields[0];
+            String name1 = (String) fields[1];
+            double avgrating = (double) fields[2];
+
+
+            Pair r = new Pair(email, avgrating, name1);
+            records.add(r);
+        }
+        return records;
+    	
+    }
+    
 }
 
 
