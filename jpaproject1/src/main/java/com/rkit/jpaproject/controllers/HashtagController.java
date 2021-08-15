@@ -27,27 +27,27 @@ public class HashtagController {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-		
-	@PostMapping("/createhashtag")
-	public void createHashtag(@RequestParam("rating")Integer rating) {
-		
-		String hashtagname = "Very happy #veryhappy #promotion #happy"; 
-		
-		final Pattern TAG_PATTERN = Pattern.compile("(?:^|\\s|[\\p{Punct}&&[^/]])(#[\\p{L}0-9-_]+)");
-		Matcher m = TAG_PATTERN.matcher(hashtagname);
-		
-		while(m.find())
-		{
-			Hashtag h = new Hashtag();
-		    String tag = m.group(1);
-			h.setHashtagname(tag.substring(1));
-			h.setRating(rating); 
-			UUID uid = UUID.randomUUID();
-			h.setId(uid);
-		    service.createHashtag(h);
-		}
-
-	}
+	
+	
+//	//store emp_rating_id
+//	@PostMapping("/createhashtag")
+//	public void createHashtag(@RequestParam("rating")Integer rating) {
+//		
+//		String hashtagname = "#promoted #excited"; 
+//		
+//		final Pattern TAG_PATTERN = Pattern.compile("(?:^|\\s|[\\p{Punct}&&[^/]])(#[\\p{L}0-9-_]+)");
+//		Matcher m = TAG_PATTERN.matcher(hashtagname);
+//		
+//		while(m.find())
+//		{
+//			Hashtag h = new Hashtag();
+//		    String tag = m.group(1);
+//			h.setHashtagname(tag.substring(1));
+//			h.setRating(rating); 
+//		    service.createHashtag(h);
+//		}
+//
+//	}
 		@GetMapping("/gettophashtags")
 		public List<String> gettophashtags(@RequestParam("rating")Integer Rating)
 		{

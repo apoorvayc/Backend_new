@@ -1,5 +1,6 @@
 package com.rkit.jpaproject.controllers;
-
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -27,11 +28,12 @@ public class LiveFeedController {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	//sort by timestamp and add timestamp  
 	@GetMapping("/livefeed")
 	public List<Record> getallRecord() {
 
 		Query query = entityManager.createQuery(
-				"select e.name,r.rating,r.description from Emp_Rating r  join Employee e on r.empId = e.id");
+				"select e.name,r.rating,r.description,r.timestamp from Emp_Rating r  join Employee e on r.empId = e.id order by timestamp(r.timestamp) desc");
 		List<Object> list = (List<Object>) query.getResultList();
 		List<Record> records = new ArrayList<Record>();
 		for (Object h1 : list) {
@@ -40,8 +42,12 @@ public class LiveFeedController {
 			String name = (String) fields[0];
 			int rating = (int) fields[1];
 			String description = (String) fields[2];
+			String t = (String) fields[3];
+			
+			System.out.println(name+rating+description+t); 
+			
 			List<String> hashtags = new ArrayList<String>();
-
+			
 			final Pattern TAG_PATTERN = Pattern.compile("(?:^|\\s|[\\p{Punct}&&[^/]])(#[\\p{L}0-9-_]+)");
 			Matcher m = TAG_PATTERN.matcher(description);
 
@@ -50,7 +56,7 @@ public class LiveFeedController {
 				hashtags.add(tag);
 			}
 
-			Record r = new Record(name, rating, hashtags, description);
+			Record r = new Record(name, rating, hashtags, description, t);
 			records.add(r);
 		}
 		return records;

@@ -28,12 +28,12 @@ public class Emp_Rating {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long empRatingId;
+	int empRatingId;
 
-	long empId;
+	int empId;
 
 	
-	public Emp_Rating(int rating, String description, long empRatingId, long empId,String timestamp) {
+	public Emp_Rating(int rating, String description, int empRatingId, int empId,String timestamp) {
 		super();
 		this.rating = rating;
 		this.description = description;
@@ -65,11 +65,11 @@ public class Emp_Rating {
 		this.description = description;
 	}
 
-	public long getEmpRatingId() {
+	public int getEmpRatingId() {
 		return empRatingId;
 	}
 
-	public void setEmpRatingId(long empRatingId) {
+	public void setEmpRatingId(int empRatingId) {
 		this.empRatingId = empRatingId;
 	}
 
@@ -77,7 +77,7 @@ public class Emp_Rating {
 		return empId;
 	}
 
-	public void setEmpId(long empId) {
+	public void setEmpId(int empId) {
 		this.empId = empId;
 	}
 

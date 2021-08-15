@@ -9,22 +9,30 @@ import javax.persistence.Id;
 @Entity
 public class Hashtag {
 		@Id
-		@Column(name = "id", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
-	    UUID id;
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+	    int id;
 		int rating;
 		String hashtagname;
-
+		int emp_rating_id;
 		
+		public int getEmp_rating_id() {
+			return emp_rating_id;
+		}
+
+		public void setEmp_rating_id(int emp_rating_id) {
+			this.emp_rating_id = emp_rating_id;
+		}
+
 		@Override
 		public String toString() {
 			return "User [id=" + id + ", rating=" + rating + ", hashtagname=" + hashtagname + "]";
 		}
 
-		public UUID getId() {
+		public int getId() {
 			return id;
 		}
 
-		public void setId(UUID id) {
+		public void setId(int id) {
 			this.id = id;
 		}
 

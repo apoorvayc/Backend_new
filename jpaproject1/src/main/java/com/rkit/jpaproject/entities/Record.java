@@ -1,5 +1,6 @@
 package com.rkit.jpaproject.entities;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Record {
@@ -8,6 +9,7 @@ public class Record {
 	private int rating;
 	private List<String> hashtag;
 	private String desc;
+	private String t;
 
 	public String getEmpName() {
 		return empName;
@@ -41,12 +43,13 @@ public class Record {
 		this.desc = desc;
 	}
 
-	public Record(String empName, int rating, List<String> hashtag, String desc) {
+	public Record(String empName, int rating, List<String> hashtag, String desc, String t2) {
 		super();
 		this.empName = empName;
 		this.rating = rating;
 		this.hashtag = hashtag;
 		this.desc = desc;
+		this.t = t2;
 	}
 
 	public Record() {
