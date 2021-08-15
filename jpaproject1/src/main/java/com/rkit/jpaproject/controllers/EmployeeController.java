@@ -18,10 +18,12 @@ public class EmployeeController {
 	@Autowired
     EmployeeService employeeService;
     
+	//return employee details
 	@PostMapping("/createemployee")
     public Employee saveEmployee(@RequestBody Employee employee){
         System.out.println("Came inside the Student Controller save method");
-        return employeeService.save(employee);
+        employeeService.save(employee);
+        return employee; 
     }
 
     @GetMapping("/getemployees")
