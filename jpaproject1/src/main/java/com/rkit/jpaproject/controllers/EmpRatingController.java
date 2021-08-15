@@ -21,8 +21,10 @@ import com.rkit.jpaproject.entities.Hashtag;
 import com.rkit.jpaproject.entities.User;
 import com.rkit.jpaproject.service.EmpRatingService;
 import com.rkit.jpaproject.service.HashtagService;
-@CrossOrigin
+
 @RestController
+@CrossOrigin
+
 public class EmpRatingController {
 	
 	@Autowired
