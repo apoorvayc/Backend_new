@@ -53,7 +53,7 @@ public class DashboardController {
     
     @GetMapping("/dashboard/searchEmployee/{name}")
     public List<Pair> searchEmployee(@PathVariable("name")String name) {
-    	Query query = (Query) entityManager.createQuery("select e.emailID,e.name,avg(r.rating) from Emp_Rating r join Employee e on r.empId = e.id group by e.id having e.name='"+name+"'");
+    	Query query = (Query) entityManager.createQuery("select e.emailID,e.name,avg(r.rating) from Emp_Rating r join Employee e on r.empId = e.id group by e.id having e.name like '"+name+"%'");
         List<Object> list = (List<Object>) query.getResultList();
         List<Pair> records = new ArrayList<Pair>();
         for (Object h1 : list) {

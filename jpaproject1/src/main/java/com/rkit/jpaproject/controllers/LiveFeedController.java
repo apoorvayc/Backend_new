@@ -66,7 +66,7 @@ public class LiveFeedController {
 	
 	@GetMapping("/searchHashtag/{hashtag}")
 	public List<Record> searchRatingwise(@PathVariable("hashtag")String hashtag) {
-		Query query = entityManager.createQuery("select e.name,r.rating,r.description,r.timestamp from Emp_Rating r join Employee e on r.empId = e.id where r.empId in (select emp_rating_id from Hashtag where hashtagname='"+ hashtag +"') order by timestamp(r.timestamp) desc ");
+		Query query = entityManager.createQuery("select e.name,r.rating,r.description,r.timestamp from Emp_Rating r join Employee e on r.empId = e.id where r.empId in (select emp_rating_id from Hashtag where hashtagname like '"+ hashtag +"%') order by timestamp(r.timestamp) desc ");
 		List<Object> list = (List<Object>) query.getResultList();
 		List<Record> records = new ArrayList<Record>();
 		for (Object h1 : list) {
