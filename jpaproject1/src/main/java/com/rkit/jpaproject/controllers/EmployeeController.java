@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
+@CrossOrigin
 @AllArgsConstructor
 public class EmployeeController {
 	

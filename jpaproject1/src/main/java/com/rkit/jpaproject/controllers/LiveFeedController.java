@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ import com.rkit.jpaproject.entities.Record;
 import com.rkit.jpaproject.service.EmpRatingService;
 
 @RestController
+@CrossOrigin
 public class LiveFeedController {
 	@Autowired
 	EmpRatingService service;
