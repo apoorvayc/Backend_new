@@ -23,14 +23,13 @@ import javax.persistence.Query;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/dashboard")
 public class DashboardController {
     EmpRatingService empRatingService;
 
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-    @GetMapping
+    @GetMapping("/dashboard")
     public List<Pair> getDashboardTable() {
 
 
@@ -50,6 +49,15 @@ public class DashboardController {
         }
         return records;
     }
+    
+//    @GetMapping("/dashboard/searchEmployee/{name}")
+//    public Pair searchEmployee() {
+//    	Query query = (Query) entityManager.createQuery("select e.emailID,e.name,avg(r.rating) from Emp_Rating r  join Employee e on r.empId = e.id group by e.id");
+//        List<Object> list = (List<Object>) query.getResultList();
+//		return null;
+//    	
+//    }
+    
 }
 
 
