@@ -8,6 +8,8 @@ import com.rkit.jpaproject.entities.Pair;
 import com.rkit.jpaproject.service.EmpRatingService;
 import com.rkit.jpaproject.service.EmployeeService;
 import lombok.AllArgsConstructor;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,7 @@ import javax.persistence.Query;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin
 public class DashboardController {
     EmpRatingService empRatingService;
 

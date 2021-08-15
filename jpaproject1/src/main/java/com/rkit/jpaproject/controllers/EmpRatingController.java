@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,8 @@ import com.rkit.jpaproject.service.EmpRatingService;
 import com.rkit.jpaproject.service.HashtagService;
 
 @RestController
+@CrossOrigin
+
 public class EmpRatingController {
 	
 	@Autowired

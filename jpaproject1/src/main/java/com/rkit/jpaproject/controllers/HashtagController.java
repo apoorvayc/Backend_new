@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,7 @@ import com.rkit.jpaproject.entities.Hashtag;
 import com.rkit.jpaproject.service.HashtagService;
 
 @RestController
+@CrossOrigin
 public class HashtagController {
 	@Autowired
 	HashtagService service;
