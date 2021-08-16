@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rkit.jpaproject.entities.Emp_Rating;
 import com.rkit.jpaproject.entities.Hashtag;
+import com.rkit.jpaproject.entities.Quotes;
 import com.rkit.jpaproject.entities.User;
 import com.rkit.jpaproject.service.EmpRatingService;
 import com.rkit.jpaproject.service.HashtagService;
@@ -30,12 +31,14 @@ public class EmpRatingController {
 	@Autowired
 	HashtagService service;
 	
+	Quotes quotes = new Quotes();
+	
 	@GetMapping("/getratingbyid/{id}")
 	public Optional<Emp_Rating> showRating(@PathVariable("id")long id) {
 		return empRatingService.getRatingById(id);
 	}
 	@PostMapping("/saverating")
-	public void createRating(@RequestBody Emp_Rating empRating) {
+	public String createRating(@RequestBody Emp_Rating empRating) {
 		Timestamp instant= Timestamp.from(Instant.now()); 
 		empRating.setTimestamp(instant.toString());
 		String hashtagname = empRating.getDescription();
@@ -54,6 +57,8 @@ public class EmpRatingController {
 			h.setEmp_rating_id(empRating.getEmpRatingId());
 		    service.createHashtag(h);
 		}
+		int rating=empRating.getRating();
+		return quotes.getQuotes(rating-1);
 		
 	}
 	
