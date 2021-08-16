@@ -64,13 +64,7 @@ public class HashtagController {
 		      return hashtags; 
 		}
 
-		 @GetMapping("/testjoin")
-		public List<String> testjoin()
-		{
-			 Query query = (Query) entityManager.createQuery("select e.emailID,e.name,avg(r.rating)  from Emp_Rating r  join Employee e on r.empId = e.id");
-			 List<String> list = (List<String>) query.getResultList();
-			 return list;
-		}
+
 		 
 		 @GetMapping("/graphorpie")
 		 public List<Graphorpie> graohorpie() {
