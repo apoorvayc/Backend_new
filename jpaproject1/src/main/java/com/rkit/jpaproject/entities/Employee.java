@@ -1,11 +1,16 @@
+
 package com.rkit.jpaproject.entities;
+
+import java.util.List;
 
 import javax.persistence.*;
 
+import com.rkit.jpaproject.service.EmployeeService;
+
 @Entity
 public class Employee {
-
-
+    
+	
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -43,4 +48,5 @@ public class Employee {
     public Employee() {
 
     }
+
 }

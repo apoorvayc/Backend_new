@@ -1,4 +1,7 @@
 package com.rkit.jpaproject.controllers;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 
 import com.rkit.jpaproject.entities.Employee;
@@ -8,8 +11,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @RestController
 @CrossOrigin
@@ -19,12 +28,13 @@ public class EmployeeController {
 	@Autowired
     EmployeeService employeeService;
     
+	@PersistenceContext
+	private EntityManager entityManager;
+	
 	//return employee details
 	@PostMapping("/createemployee")
     public Employee saveEmployee(@RequestBody Employee employee){
-        System.out.println("Came inside the Student Controller save method");
-        employeeService.save(employee);
-        return employee; 
+		return employeeService.createemployee(employee); 
     }
 
     @GetMapping("/getemployees")
@@ -44,5 +54,7 @@ public class EmployeeController {
     public List<Employee> fetchByName(@PathVariable("name") String name){
         return employeeService.findByName(name);
     }
-}
+    
 
+
+}
