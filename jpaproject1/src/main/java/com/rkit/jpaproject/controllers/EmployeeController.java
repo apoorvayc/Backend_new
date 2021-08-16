@@ -33,24 +33,7 @@ public class EmployeeController {
 	//return employee details
 	@PostMapping("/createemployee")
     public Employee saveEmployee(@RequestBody Employee employee){
-		Query query = (Query) entityManager.createQuery("select id from Employee where emailID='"+employee.getEmailID()+"'"); 
-		List<Long> list = (List<Long>) query.getResultList();
-	    long id = 0;
-		for(long h1:list) {
-		   id = (long) h1; 
-	    }
-	    if (id != 0) {
-		Employee e = new Employee();
-		e.setId(id);
-		e.setEmailID(employee.getEmailID());
-		e.setName(employee.getName());
-		return e;
-		}
-		System.out.println("here 2 "+query.getFirstResult());
-		
-		employeeService.save(employee);
-		 return employee; 
-		
+		return employeeService.createemployee(employee); 
     }
 
     @GetMapping("/getemployees")
@@ -71,6 +54,7 @@ public class EmployeeController {
         return employeeService.findByName(name);
     }
     
+
 
 }
 

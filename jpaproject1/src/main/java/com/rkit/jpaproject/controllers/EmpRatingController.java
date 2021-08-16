@@ -28,8 +28,7 @@ public class EmpRatingController {
 	@Autowired
 	EmpRatingService empRatingService;
 	
-	@Autowired
-	HashtagService service;
+
 	
 	Quotes quotes = new Quotes();
 	
@@ -39,29 +38,8 @@ public class EmpRatingController {
 	}
 	@PostMapping("/saverating")
 	public String createRating(@RequestBody Emp_Rating empRating) {
-		Timestamp instant= Timestamp.from(Instant.now()); 
-		empRating.setTimestamp(instant.toString());
-		String hashtagname = empRating.getDescription();
-		
-		System.out.println(empRating.getEmpRatingId());
-		
-		final Pattern TAG_PATTERN = Pattern.compile("(?:^|\\s|[\\p{Punct}&&[^/]])(#[\\p{L}0-9-_]+)");
-		Matcher m = TAG_PATTERN.matcher(hashtagname);
-		empRatingService.saveRating(empRating);
-		while(m.find())
-		{
-			Hashtag h = new Hashtag();
-		    String tag = m.group(1);
-			h.setHashtagname(tag.substring(1));
-			h.setRating(empRating.getRating()); 
-			h.setEmp_rating_id(empRating.getEmpRatingId());
-		    service.createHashtag(h);
-		}
-		int rating=empRating.getRating();
-		return quotes.getQuotes(rating-1);
-		
+		return empRatingService.saverating(empRating);
 	}
-	
 	
 	@GetMapping("/getallratings")
 	public List<Emp_Rating> showAllRating(){
