@@ -80,6 +80,7 @@ public class EmpRatingService {
 			h.setEmp_rating_id(empRating.getEmpRatingId());
 		    service.createHashtag(h);
 		}
+		
 		int rating=empRating.getRating();
 		JSONObject obj=new JSONObject();    
 		  obj.put("quote",quotes.getQuotes(rating-1));    
@@ -87,16 +88,16 @@ public class EmpRatingService {
 		return obj;
     }
 
-    public List<JSONObject> getemployeeratings(int id) {
-    	Query query = entityManager.createQuery("select rating, date(timestamp) from Emp_Rating where emp_id="+id+" order by timestamp(timestamp)");
+    public List<JSONObject> getemployeeratings(String email) {
+    	Query query = entityManager.createQuery("select e.emailID,er.rating, date(er.timestamp) from Emp_Rating er join Employee e on er.empId=e.id where e.emailID = '"+email+"' order by timestamp(timestamp) ");
 		List<Object> list = query.getResultList();
 
 		List<JSONObject> jsonlist = new ArrayList<JSONObject>();
 		for(Object h1:list) {
 		    Object[] fields = (Object[]) h1;
   		    
-		    Integer rating = (Integer) fields[0];
-  		    Date d = (Date) fields[1]; 
+		    Integer rating = (Integer) fields[1];
+  		    Date d = (Date) fields[2]; 
   		    SimpleDateFormat formatter = new SimpleDateFormat("yyyy MM dd");  
 	  	    String strDate = formatter.format(d);  
 

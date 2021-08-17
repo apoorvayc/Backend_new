@@ -52,9 +52,9 @@ public class EmpRatingController {
 		return empRatingService.getAllRating();
 	}
 
-    @GetMapping("getEmployeeRatings/{id}")
-    public List<JSONObject> getemployeeratings(@PathVariable("id")int id) {
-    	return empRatingService.getemployeeratings(id); 
+    @GetMapping("getEmployeeRatings/{email}")
+    public List<JSONObject> getemployeeratings(@PathVariable("email")String email) {
+    	return empRatingService.getemployeeratings(email); 
     }
 
 
