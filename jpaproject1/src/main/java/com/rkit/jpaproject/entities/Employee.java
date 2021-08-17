@@ -1,20 +1,38 @@
 package com.rkit.jpaproject.entities;
 
-import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.*;
 
-import com.rkit.jpaproject.service.EmployeeService;
+import lombok.Data;
 
 @Entity
+@Data
 public class Employee {
-    
-	
+
+
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "Employee_name", nullable = false )
+    @Override
+	public int hashCode() {
+		return Objects.hash(emailID, id, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		return Objects.equals(emailID, other.emailID) && id == other.id && Objects.equals(name, other.name);
+	}
+
+	@Column(name = "Employee_name", nullable = false )
     private String name;
 
     public long getId() {
@@ -48,5 +66,13 @@ public class Employee {
 
     }
 
+	public Employee(long i, String string, String string2) {
+		// TODO Auto-generated constructor stub
+		this.id=i;
+		this.name=string;
+		this.emailID=string2;
+	}
+
+	
 }
 
