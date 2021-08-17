@@ -1,8 +1,7 @@
 package com.rkit.jpaproject.entities;
 
 import java.util.Date;
-
-
+import java.util.Objects;
 import java.sql.Timestamp;  
 import java.time.Instant;  
 
@@ -40,8 +39,27 @@ public class Emp_Rating {
 		this.empRatingId = empRatingId;
 		this.empId = empId;
 		 
-		this.timestamp = this.timestamp;
-		System.out.println("\nfsdfds\n");
+		this.timestamp =timestamp;
+		
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(description, empId, empRatingId, rating, timestamp);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Emp_Rating other = (Emp_Rating) obj;
+		return Objects.equals(description, other.description) && empId == other.empId
+				&& empRatingId == other.empRatingId && rating == other.rating
+				&& Objects.equals(timestamp, other.timestamp);
 	}
 
 	public Emp_Rating() {
@@ -82,7 +100,7 @@ public class Emp_Rating {
 	}
 
 	public String getTimestamp() {
-		return timestamp;
+		return this.timestamp;
 	}
 
 	public void setTimestamp(String st) {
