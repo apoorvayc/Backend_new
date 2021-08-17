@@ -30,5 +30,9 @@ public class HashtagController {
 		 public List<Graphorpie> graohorpie() {
 			 return service.graphorpie(); 
 		 }
-
+		 
+		 @GetMapping("/gettrendinghashtags")
+		 public List<String> trendinghashtags() {
+			 return service.gettrendinghashtags();
+		 }
 }

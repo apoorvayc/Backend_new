@@ -59,5 +59,14 @@ public class HashtagService {
 		 return graphorpie1; 
 	}
 	
+	
+	public List<String> gettrendinghashtags() {
+		
+		Query query = entityManager.createQuery("select hashtagname as c from Hashtag group by hashtagname order by count(hashtagname) desc");
+		List<String> list = query.getResultList();
+		return list;
+
+	}
+	
 
 }

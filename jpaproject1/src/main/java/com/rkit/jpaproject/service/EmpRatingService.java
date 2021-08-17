@@ -27,8 +27,12 @@ public class EmpRatingService {
 	@Autowired
 	HashtagService service;
 	
-	public Optional<Emp_Rating> getRatingById(long id) {
+	public Optional<Emp_Rating> getRatingById(long id) throws NoSuchEmployeeException {
+		if (empRatingRepository.findById(id) == null){
+			throw new NoSuchEmployeeException(); 
+		}
 		return empRatingRepository.findById(id);
+			
 		
 	}
 	public List<Emp_Rating> getAllRating() {
