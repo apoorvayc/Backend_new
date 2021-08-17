@@ -1,5 +1,5 @@
 package com.rkit.jpaproject.service;
-
+import org.json.simple.JSONObject;    
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
@@ -45,7 +45,7 @@ public class EmpRatingService {
 
 
 	Quotes quotes = new Quotes();
-    public String saverating(Emp_Rating empRating) {
+    public JSONObject saverating(Emp_Rating empRating) {
     	Timestamp instant= Timestamp.from(Instant.now()); 
 		empRating.setTimestamp(instant.toString());
 		String hashtagname = empRating.getDescription();
@@ -65,7 +65,10 @@ public class EmpRatingService {
 		    service.createHashtag(h);
 		}
 		int rating=empRating.getRating();
-		return quotes.getQuotes(rating-1);
+		JSONObject obj=new JSONObject();    
+		  obj.put("quote",quotes.getQuotes(rating-1));    
+
+		return obj;
     }
 
 }

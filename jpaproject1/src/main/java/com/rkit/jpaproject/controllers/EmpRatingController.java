@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,7 @@ public class EmpRatingController {
 		return empRatingService.getRatingById(id);
 	}
 	@PostMapping("/saverating")
-	public String createRating(@RequestBody Emp_Rating empRating) {
+	public JSONObject createRating(@RequestBody Emp_Rating empRating) {
 		return empRatingService.saverating(empRating);
 	}
 	
