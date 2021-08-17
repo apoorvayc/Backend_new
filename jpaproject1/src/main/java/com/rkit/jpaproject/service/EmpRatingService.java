@@ -2,10 +2,16 @@ package com.rkit.jpaproject.service;
 import org.json.simple.JSONObject;    
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.rkit.jpaproject.entities.Pair;
 import com.rkit.jpaproject.entities.Quotes;
@@ -14,12 +20,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rkit.jpaproject.entities.Emp_Rating;
+import com.rkit.jpaproject.entities.Graphorpie;
 import com.rkit.jpaproject.entities.Hashtag;
 import com.rkit.jpaproject.entities.User;
 import com.rkit.jpaproject.repository.EmpRatingRepository;
+import java.text.SimpleDateFormat;  
 
 @Service
 public class EmpRatingService {
+
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	@Autowired
 	EmpRatingRepository empRatingRepository;
@@ -75,4 +87,27 @@ public class EmpRatingService {
 		return obj;
     }
 
+    public List<JSONObject> getemployeeratings(int id) {
+    	Query query = entityManager.createQuery("select rating, date(timestamp) from Emp_Rating where emp_id="+id+" order by timestamp(timestamp)");
+		List<Object> list = query.getResultList();
+
+		List<JSONObject> jsonlist = new ArrayList<JSONObject>();
+		for(Object h1:list) {
+		    Object[] fields = (Object[]) h1;
+  		    
+		    Integer rating = (Integer) fields[0];
+  		    Date d = (Date) fields[1]; 
+  		    SimpleDateFormat formatter = new SimpleDateFormat("yyyy MM dd");  
+	  	    String strDate = formatter.format(d);  
+
+	  	    JSONObject obj=new JSONObject();
+
+  		    obj.put("rating", rating);
+  		    obj.put("date", strDate);
+  		    jsonlist.add(obj);
+  		    
+    }
+
+    	return jsonlist;
+    }
 }
