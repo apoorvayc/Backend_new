@@ -23,6 +23,7 @@ import com.rkit.jpaproject.entities.Quotes;
 import com.rkit.jpaproject.entities.User;
 import com.rkit.jpaproject.service.EmpRatingService;
 import com.rkit.jpaproject.service.HashtagService;
+import com.rkit.jpaproject.service.NoSuchEmployeeException;
 
 @RestController
 @CrossOrigin
@@ -37,7 +38,7 @@ public class EmpRatingController {
 	Quotes quotes = new Quotes();
 	
 	@GetMapping("/getratingbyid/{id}")
-	public Optional<Emp_Rating> showRating(@PathVariable("id")long id) {
+	public Optional<Emp_Rating> showRating(@PathVariable("id")long id) throws NoSuchEmployeeException {
 		return empRatingService.getRatingById(id);
 	}
 	@PostMapping("/saverating")
